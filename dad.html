@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dad Tracker</title>
+</head>
+<body>
+
+<h2>📍 Sharing Location...</h2>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
+import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDFZtAdPvCybY0kisiaWb5x1UUEd9TFirw",
+  authDomain: "tracker-d34a3.firebaseapp.com",
+  projectId: "tracker-d34a3",
+  storageBucket: "tracker-d34a3.firebasestorage.app",
+  messagingSenderId: "964015249184",
+  appId: "1:964015249184:web:2128007d10934bc5b56945"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+navigator.geolocation.watchPosition((pos) => {
+  set(ref(db, "dad"), {
+    lat: pos.coords.latitude,
+    lng: pos.coords.longitude,
+    time: Date.now()
+  });
+});
+</script>
+
+</body>
+</html>
